@@ -63,7 +63,6 @@ public class TransactionController {
         BigDecimal totalExpenses = transactionService.getTotalExpensesByUserId(userId);
         return ResponseEntity.ok(totalExpenses);
     }
-
     
 }
 
