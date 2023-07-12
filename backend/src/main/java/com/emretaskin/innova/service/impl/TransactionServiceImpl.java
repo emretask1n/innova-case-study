@@ -12,6 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,5 +112,33 @@ public class TransactionServiceImpl implements TransactionService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public BigDecimal getTotalExpensesByUserId(Long userId) {
+        User user = getUserById(userId);
+        List<Transaction> transactions = transactionRepository.findByUser(user);
+
+        BigDecimal totalExpenses = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            totalExpenses = totalExpenses.add(transaction.getAmount());
+        }
+
+        return totalExpenses;
+    }
+
+    @Override
+    public BigDecimal calculateTotalExpenseByDate(Long userId, LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        return transactionRepository.calculateTotalExpenseByDateRange(userId, startOfDay, endOfDay);
+    }
+
+    @Override
+    public BigDecimal calculateTotalExpenseByDateRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        LocalDateTime startOfStartDate = startDate.atStartOfDay();
+        LocalDateTime endOfEndDate = endDate.atTime(LocalTime.MAX);
+
+        return transactionRepository.calculateTotalExpenseByDateRange(userId, startOfStartDate, endOfEndDate);
+    }
 }
 

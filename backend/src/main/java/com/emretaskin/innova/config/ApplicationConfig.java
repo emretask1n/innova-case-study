@@ -1,5 +1,6 @@
 package com.emretaskin.innova.config;
 
+import com.emretaskin.innova.logger.LoggingAspect;
 import com.emretaskin.innova.repository.UserRepository;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -45,6 +46,11 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public LoggingAspect loggingAspect(){
+        return new LoggingAspect();
     }
 
     @Bean
