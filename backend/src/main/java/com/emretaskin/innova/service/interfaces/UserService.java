@@ -6,4 +6,6 @@ public interface UserService {
     void saveUser(User user);
 
     User loadUserByUsername(String username);
+
+    User findUserById(Long userId);
 }

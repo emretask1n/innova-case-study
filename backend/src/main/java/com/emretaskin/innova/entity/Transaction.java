@@ -1,5 +1,6 @@
 package com.emretaskin.innova.entity;
 
+import com.emretaskin.innova.enums.TransactionCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,9 @@ public class Transaction {
 
     private BigDecimal amount;
 
-    private String category;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TransactionCategory category;
 
     private LocalDate date;
 
