@@ -4,6 +4,7 @@ import com.emretaskin.innova.dto.request.TransactionRequest;
 import com.emretaskin.innova.dto.response.TransactionResponse;
 import com.emretaskin.innova.service.interfaces.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<TransactionResponse> createTransaction(
             @PathVariable Long userId,
-            @RequestBody TransactionRequest transactionRequest) {
+            @Valid @RequestBody TransactionRequest transactionRequest) {
         TransactionResponse createdTransaction = transactionService.createTransaction(userId, transactionRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
     }
@@ -58,7 +59,7 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> updateTransaction(
             @PathVariable Long userId,
             @PathVariable Long transactionId,
-            @RequestBody TransactionRequest transactionRequest) {
+            @Valid @RequestBody TransactionRequest transactionRequest) {
         TransactionResponse updatedTransaction = transactionService.updateTransaction(userId, transactionId, transactionRequest);
         return ResponseEntity.ok(updatedTransaction);
     }

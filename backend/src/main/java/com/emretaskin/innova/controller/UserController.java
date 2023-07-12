@@ -4,6 +4,7 @@ import com.emretaskin.innova.dto.request.UserRequest;
 import com.emretaskin.innova.dto.response.UserResponse;
 import com.emretaskin.innova.service.interfaces.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UserController {
 
     @Operation(summary = "Update a user by user ID")
     @PutMapping
-    public ResponseEntity<UserResponse> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequest userRequest) {
         UserResponse updatedUser = userService.updateUser(userId, userRequest);
         return ResponseEntity.ok(updatedUser);
     }
