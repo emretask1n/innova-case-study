@@ -40,7 +40,7 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<TransactionResponse> createTransaction(
             @PathVariable Long userId,
-            @Valid @RequestBody TransactionRequest transactionRequest) {
+            @RequestBody TransactionRequest transactionRequest) {
         TransactionResponse createdTransaction = transactionService.createTransaction(userId, transactionRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
     }
@@ -59,7 +59,7 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> updateTransaction(
             @PathVariable Long userId,
             @PathVariable Long transactionId,
-            @Valid @RequestBody TransactionRequest transactionRequest) {
+            @RequestBody TransactionRequest transactionRequest) {
         TransactionResponse updatedTransaction = transactionService.updateTransaction(userId, transactionId, transactionRequest);
         return ResponseEntity.ok(updatedTransaction);
     }
