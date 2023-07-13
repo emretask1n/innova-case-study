@@ -34,6 +34,17 @@ public class TransactionAggregationService {
         });
     }
 
+    @Scheduled(fixedRate = 20000) // 20 saniyede bir çalışacak şekilde ayarlandı
+    public void aggregateEvery20Seconds() {
+        List<User> users = userService.getAllUsers();
+
+        users.parallelStream().forEach(user -> {
+            BigDecimal totalExpense = transactionService.getTotalExpensesByUserId(user.getId());
+
+            System.out.println("User: " + user.getUsername() + ", Total Expense: " + totalExpense);
+        });
+    }
+
     @Scheduled(cron = "0 0 0 * * MON") // Haftalık olarak pazartesi günü çalışacak şekilde ayarlandı
     public void aggregateWeeklyExpenses() {
         List<User> users = userService.getAllUsers();
