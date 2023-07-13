@@ -114,15 +114,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public BigDecimal getTotalExpensesByUserId(Long userId) {
-        User user = getUserById(userId);
-        List<Transaction> transactions = transactionRepository.findByUser(user);
-
-        BigDecimal totalExpenses = BigDecimal.ZERO;
-        for (Transaction transaction : transactions) {
-            totalExpenses = totalExpenses.add(transaction.getAmount());
-        }
-
-        return totalExpenses;
+        return transactionRepository.calculateTotalExpensesByUserId(userId);
     }
 
     @Override
