@@ -30,7 +30,6 @@ Proje, aşağıdaki temel paket yapısına sahiptir:
 - `com.emretaskin.innova.service`: İş mantığını gerçekleştiren servis sınıfları ve arayüzleri
 - `com.emretaskin.innova.security`: Güvenlik konfigürasyonunu ve JWT yetkilendirme işlemlerini içeren sınıflar
 - `com.emretaskin.innova.config`: Spring yapılandırma sınıfları
-- `com.emretaskin.innova.util`: Yardımcı sınıflar ve araçlar
 
 ## Projeyi Çalıştırma
 
